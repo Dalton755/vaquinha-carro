@@ -45,6 +45,7 @@
       font-size: 16px;
       border-radius: 6px;
       cursor: pointer;
+      margin: 10px 5px;
     }
     button:hover {
       background-color: #218838;
@@ -54,8 +55,13 @@
       max-width: 400px;
       height: auto;
       border-radius: 8px;
-      margin: 10px auto;
+      margin: 10px auto 5px auto;
       display: block;
+    }
+    .legenda {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
     }
     .qr {
       margin-top: 25px;
@@ -64,6 +70,22 @@
       width: 200px;
       height: auto;
       border-radius: 8px;
+    }
+    .whatsapp-links {
+      margin-top: 20px;
+    }
+    .whatsapp-links a {
+      display: inline-block;
+      background-color: #25D366;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      margin: 5px;
+      font-weight: bold;
+    }
+    .whatsapp-links a:hover {
+      background-color: #1ebe5d;
     }
   </style>
 </head>
@@ -82,11 +104,25 @@
     </div>
 
     <h3>Veja as imagens do motor:</h3>
-    <img class="foto-motor" src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/IMG-20250626-WA0012.jpg" alt="Motor quebrado 1">
-    <img class="foto-motor" src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/IMG-20250626-WA0014.jpg" alt="Motor quebrado 2">
-    <img class="foto-motor" src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/IMG-20250626-WA0016.jpg" alt="Motor quebrado 3">
 
-    <p>Deus abençoe a todos que puderem contribuir ou compartilhar 🙏</p>
+    <img class="foto-motor" src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/IMG-20250626-WA0012.jpg" alt="Motor quebrado 1">
+    <p class="legenda">1. O virabrequim está com folga</p>
+
+    <img class="foto-motor" src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/IMG-20250626-WA0014.jpg" alt="Motor quebrado 2">
+    <p class="legenda">2. Está com baixa compressão</p>
+
+    <img class="foto-motor" src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/IMG-20250626-WA0016.jpg" alt="Motor quebrado 3">
+    <p class="legenda">3. Precisa retificar o motor</p>
+
+    <div class="whatsapp-links">
+      <h3>Fale com a gente no WhatsApp:</h3>
+      <a href="https://wa.me/5511940791693" target="_blank">WhatsApp da Lais</a>
+      <a href="https://wa.me/5511940593780" target="_blank">WhatsApp do Dalton</a>
+    </div>
+
+    <button onclick="compartilhar()">Compartilhar esta vaquinha</button>
+
+    <p style="margin-top: 20px;">Deus abençoe a todos que puderem contribuir ou compartilhar 🙏</p>
   </div>
 
   <script>
@@ -95,6 +131,18 @@
       navigator.clipboard.writeText(chave).then(() => {
         alert("Chave Pix copiada com sucesso!");
       });
+    }
+
+    function compartilhar() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Ajude a consertar o carro',
+          text: 'Estamos precisando de ajuda para consertar o carro que usamos para trabalhar. Qualquer valor é bem-vindo!',
+          url: window.location.href
+        }).catch((error) => console.log('Erro ao compartilhar:', error));
+      } else {
+        alert("Compartilhamento automático não suportado neste dispositivo.");
+      }
     }
   </script>
 </body>
