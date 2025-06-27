@@ -7,62 +7,73 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f6f8fa;
+      background-color: #f2f2f2;
       margin: 0;
       padding: 20px;
       text-align: center;
     }
     .container {
-      background-color: white;
-      border-radius: 12px;
-      padding: 20px;
-      max-width: 500px;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 30px 20px;
+      max-width: 600px;
       margin: 0 auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
     }
-    img {
-      max-width: 100%;
-      border-radius: 8px;
-      margin: 10px 0;
+    h1 {
+      color: #333;
+    }
+    p {
+      font-size: 17px;
+      line-height: 1.5;
+      color: #555;
     }
     .pix-key {
-      font-size: 18px;
-      margin: 10px 0;
+      background: #e9ecef;
+      padding: 10px;
+      border-radius: 8px;
       font-weight: bold;
+      font-size: 18px;
+      margin: 15px auto;
+      display: inline-block;
     }
     button {
-      background-color: #007bff;
+      background-color: #28a745;
       color: white;
       border: none;
-      padding: 12px 24px;
+      padding: 12px 20px;
       font-size: 16px;
       border-radius: 6px;
       cursor: pointer;
+      margin-top: 10px;
     }
     button:hover {
-      background-color: #0056b3;
+      background-color: #218838;
+    }
+    img {
+      width: 100%;
+      max-width: 500px;
+      margin: 10px 0;
+      border-radius: 8px;
+    }
+    .qr {
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Ajude a Lais consertar o carro</h1>
-    <p>Meu carro quebrou e dependo dele diariamente para trabalhar.<br>
-    O conserto do motor custa <strong>R$ 6.000</strong>. Eu preciso de ajuda para voltar a ter minha renda.</p>
-    
-    <img src="https://chat.openai.com/mnt/data/A_webpage_for_a_Brazilian_crowdfunding_effort_to_r.png" alt="Imagem do motor quebrado" />
+    <h1>Ajude a Lais a consertar o carro</h1>
+    <p>Meu carro quebrou e dependo dele para trabalhar. O motor precisa de reparos urgentes, e o custo é de <strong>R$ 6.000</strong>.<br>
+    Qualquer ajuda é bem-vinda! 🙏</p>
 
-    <p class="pix-key" id="pix">11940593780</p>
-    <button onclick="copiarPix()">Copiar PIX</button>
-  </div>
+    <p class="pix-key" id="pix">Chave Pix: 11940593780</p>
+    <button onclick="copiarPix()">Copiar chave Pix</button>
 
-  <script>
-    function copiarPix() {
-      const chave = document.getElementById("pix").innerText;
-      navigator.clipboard.writeText(chave).then(() => {
-        alert("Chave PIX copiada!");
-      });
-    }
-  </script>
-</body>
-</html>
+    <div class="qr">
+      <h3>Escaneie para doar</h3>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?data=11940593780&size=200x200" alt="QR Code Pix">
+    </div>
+
+    <h3>Fotos do motor</h3>
+    <img src="https://chat.openai
