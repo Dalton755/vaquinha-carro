@@ -33,3 +33,59 @@
       padding: 12px;
       border-radius: 8px;
       font-weight: bold;
+      font-size: 18px;
+      margin: 20px auto;
+      display: inline-block;
+    }
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    img {
+      width: 100%;
+      max-width: 600px;
+      margin: 15px 0;
+      border-radius: 8px;
+    }
+    .qr {
+      margin-top: 25px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ajude a Lais a consertar o carro</h1>
+    <p>O carro que usamos para trabalhar quebrou. Precisamos de <strong>R$ 6.000</strong> para arrumar o motor.<br>
+    Qualquer valor que puder doar será de grande ajuda!</p>
+
+    <p class="pix-key" id="pix">Chave Pix: 11940593780</p>
+    <button onclick="copiarPix()">Copiar chave Pix</button>
+
+    <div class="qr">
+      <h3>Ou escaneie o QR Code:</h3>
+      <img src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=11940593780" alt="QR Code Pix">
+    </div>
+
+    <h3>Veja as imagens do motor:</h3>
+    <img src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/IMG-20250626-WA0012.jpg" alt="Motor quebrado 1">
+    <img src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/IMG-20250626-WA0014.jpg" alt="Motor quebrado 2">
+    <img src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/IMG-20250626-WA0016.jpg" alt="Motor quebrado 3">
+
+    <p>Deus abençoe a todos que puderem contribuir ou compartilhar 🙏</p>
+  </div>
+
+  <script>
+    function copiarPix() {
+      const chave = document.getElementById("pix").innerText.replace('Chave Pix: ', '');
+      navigator.clipboard.writeText(chave).then(() => {
+        alert("Chave Pix copiada com sucesso!");
+      });
+    }
