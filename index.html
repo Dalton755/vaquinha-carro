@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ajude a Lais consertar o carro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f6f8fa;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 500px;
+      margin: 0 auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+    .pix-key {
+      font-size: 18px;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ajude a Lais consertar o carro</h1>
+    <p>Meu carro quebrou e dependo dele diariamente para trabalhar.<br>
+    O conserto do motor custa <strong>R$ 6.000</strong>. Eu preciso de ajuda para voltar a ter minha renda.</p>
+    
+    <img src="https://chat.openai.com/mnt/data/A_webpage_for_a_Brazilian_crowdfunding_effort_to_r.png" alt="Imagem do motor quebrado" />
+
+    <p class="pix-key" id="pix">11940593780</p>
+    <button onclick="copiarPix()">Copiar PIX</button>
+  </div>
+
+  <script>
+    function copiarPix() {
+      const chave = document.getElementById("pix").innerText;
+      navigator.clipboard.writeText(chave).then(() => {
+        alert("Chave PIX copiada!");
+      });
+    }
+  </script>
+</body>
+</html>
