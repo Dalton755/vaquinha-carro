@@ -72,20 +72,43 @@
       border-radius: 8px;
     }
     .whatsapp-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
       margin-top: 20px;
     }
     .whatsapp-links a {
-      display: inline-block;
       background-color: #25D366;
       color: white;
       text-decoration: none;
       padding: 10px 20px;
       border-radius: 6px;
-      margin: 5px;
       font-weight: bold;
+      width: 80%;
+      max-width: 300px;
+      box-sizing: border-box;
     }
     .whatsapp-links a:hover {
       background-color: #1ebe5d;
+    }
+    .progresso {
+      background-color: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px auto;
+      width: 100%;
+      max-width: 400px;
+      height: 30px;
+      box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    }
+    .barra {
+      background-color: #28a745;
+      height: 100%;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      line-height: 30px;
     }
   </style>
 </head>
@@ -95,16 +118,21 @@
     <p>O carro que usamos para trabalhar quebrou. Precisamos de <strong>R$ 6.000</strong> para arrumar o motor.<br>
     Qualquer valor que puder doar será de grande ajuda!</p>
 
-    <p class="pix-key" id="pix">Chave Pix: 11940791693</p>
+    <p class="pix-key" id="pix">Chave Pix: 11940593780</p>
     <button onclick="copiarPix()">Copiar chave Pix</button>
 
     <div class="qr">
       <h3>Escaneie o QR Code para doar:</h3>
-      <img class="qr-code" src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/QR_Code_Lais.jpg" alt="QR Code Pix">
+      <img class="qr-code" src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/QRCode.jpg" alt="QR Code Pix">
     </div>
 
-    <h3>Veja as imagens do motor:</h3>
+    <h3>Progresso da arrecadação:</h3>
+    <div class="progresso">
+      <div class="barra" id="barraProgresso"></div>
+    </div>
+    <p id="valorArrecadado"></p>
 
+    <h3>Veja as imagens do motor:</h3>
     <img class="foto-motor" src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/IMG-20250626-WA0012.jpg" alt="Motor quebrado 1">
     <p class="legenda">1. O virabrequim está com folga</p>
 
@@ -144,6 +172,18 @@
         alert("Compartilhamento automático não suportado neste dispositivo.");
       }
     }
+
+    // 🧠 Edite aqui o valor arrecadado!
+    const arrecadado = 2500;
+    const meta = 6000;
+
+    const percentual = Math.min((arrecadado / meta) * 100, 100).toFixed(1);
+    const barra = document.getElementById("barraProgresso");
+    const texto = document.getElementById("valorArrecadado");
+
+    barra.style.width = percentual + "%";
+    barra.textContent = `R$ ${arrecadado.toLocaleString('pt-BR')} / R$ ${meta.toLocaleString('pt-BR')}`;
+    texto.textContent = `Progresso: ${percentual}% da meta atingida`;
   </script>
 </body>
 </html>
