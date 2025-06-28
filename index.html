@@ -128,9 +128,12 @@
 
     <h3>Progresso da arrecadação:</h3>
     <div class="progresso">
-      <div class="barra" id="barraProgresso"></div>
-    </div>
-    <p id="valorArrecadado"></p>
+  <div class="barra" id="barraProgresso">
+    <span id="textoBarra"></span>
+  </div>
+</div>
+<p id="valorArrecadado"></p>
+
 
     <h3>Veja as imagens do motor:</h3>
     <img class="foto-motor" src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/IMG-20250626-WA0012.jpg" alt="Motor quebrado 1">
@@ -174,16 +177,28 @@
     }
 
     // 🧠 Edite aqui o valor arrecadado!
-    const arrecadado = 345;
-    const meta = 6000;
 
-    const percentual = Math.min((arrecadado / meta) * 100, 100).toFixed(1);
-    const barra = document.getElementById("barraProgresso");
-    const texto = document.getElementById("valorArrecadado");
+  // Edite apenas esse valor:
+  const arrecadado = 245;
+  const meta = 6000;
 
-    barra.style.width = percentual + "%";
-    barra.textContent = `R$ ${arrecadado.toLocaleString('pt-BR')} / R$ ${meta.toLocaleString('pt-BR')}`;
-    texto.textContent = `Progresso: ${percentual}% da meta atingida`;
-  </script>
+  const percentual = Math.min((arrecadado / meta) * 100, 100).toFixed(1);
+  const barra = document.getElementById("barraProgresso");
+  const textoDentro = document.getElementById("textoBarra");
+  const textoFora = document.getElementById("valorArrecadado");
+
+  const texto = `R$ ${arrecadado.toLocaleString('pt-BR')} / R$ ${meta.toLocaleString('pt-BR')}`;
+
+  barra.style.width = percentual + "%";
+
+  if (percentual >= 15) {
+    textoDentro.textContent = texto;
+    textoFora.textContent = `Progresso: ${percentual}% da meta atingida`;
+  } else {
+    textoDentro.textContent = '';
+    textoFora.textContent = `Progresso: ${percentual}% da meta atingida — ${texto}`;
+  }
+</script>
+
 </body>
 </html>
