@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html><html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -110,53 +109,71 @@
       text-align: center;
       line-height: 30px;
     }
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .galeria .item {
+      background-color: #fafafa;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 0 6px rgba(0,0,0,0.05);
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Ajude a Lais a consertar o carro</h1>
     <p>O carro que usamos para trabalhar quebrou. Precisamos de <strong>R$ 6.000</strong> para arrumar o motor.<br>
-    Qualquer valor que puder doar será de grande ajuda!</p>
+    Qualquer valor que puder doar será de grande ajuda!</p><p class="pix-key" id="pix">Chave Pix: 11940791693</p>
+<button onclick="copiarPix()">Copiar chave Pix</button>
 
-    <p class="pix-key" id="pix">Chave Pix: 11940791693</p>
-    <button onclick="copiarPix()">Copiar chave Pix</button>
+<div class="qr">
+  <h3>Escaneie o QR Code para doar:</h3>
+  <img class="qr-code" src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/QR_Code_Lais.jpg" alt="QR Code Pix">
+</div>
 
-    <div class="qr">
-      <h3>Escaneie o QR Code para doar:</h3>
-      <img class="qr-code" src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/QR_Code_Lais.jpg" alt="QR Code Pix">
-    </div>
-
-    <h3>Progresso da arrecadação:</h3>
-    <div class="progresso">
+<h3>Progresso da arrecada&ccedil;&atilde;o:</h3>
+<div class="progresso">
   <div class="barra" id="barraProgresso">
     <span id="textoBarra"></span>
   </div>
 </div>
 <p id="valorArrecadado"></p>
 
-
-    <h3>Veja as imagens do motor:</h3>
+<h3>Veja as imagens do motor:</h3>
+<div class="galeria">
+  <div class="item">
     <img class="foto-motor" src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/Carro.jpg" alt="Motor quebrado 1">
     <p class="legenda">1. O virabrequim está com folga</p>
-
+  </div>
+  <div class="item">
     <img class="foto-motor" src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/IMG-20250626-WA0014.jpg" alt="Motor quebrado 2">
     <p class="legenda">2. Está com baixa compressão</p>
-
+  </div>
+  <div class="item">
     <img class="foto-motor" src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/IMG-20250626-WA0016.jpg" alt="Motor quebrado 3">
     <p class="legenda">3. Precisa retificar o motor</p>
-
-    <div class="whatsapp-links">
-      <h3>Fale com a gente no WhatsApp:</h3>
-      <a href="https://wa.me/5511940791693" target="_blank">WhatsApp da Lais</a>
-      <a href="https://wa.me/5511940593780" target="_blank">WhatsApp do Dalton</a>
-    </div>
-
-    <button onclick="compartilhar()">Compartilhar esta vaquinha</button>
-
-    <p style="margin-top: 20px;">Deus abençoe a todos que puderem contribuir ou compartilhar 🙏</p>
   </div>
+  <div class="item">
+    <img class="foto-motor" src="https://raw.githubusercontent.com/Dalton755/vaquinha-carro/main/Dalton_Lais.jpg" alt="Dalton e Lais">
+    <p class="legenda">Agradecemos por entrar na p&aacute;gina 🙏</p>
+  </div>
+</div>
 
-  <script>
+<div class="whatsapp-links">
+  <h3>Fale com a gente no WhatsApp:</h3>
+  <a href="https://wa.me/5511940791693" target="_blank">WhatsApp da Lais</a>
+  <a href="https://wa.me/5511940593780" target="_blank">WhatsApp do Dalton</a>
+</div>
+
+<button onclick="compartilhar()">Compartilhar esta vaquinha</button>
+
+<p style="margin-top: 20px;">Deus abençoe a todos que puderem contribuir ou compartilhar 🙏</p>
+
+  </div>  <script>
     function copiarPix() {
       const chave = document.getElementById("pix").innerText.replace('Chave Pix: ', '');
       navigator.clipboard.writeText(chave).then(() => {
@@ -176,29 +193,21 @@
       }
     }
 
-    // 🧠 Edite aqui o valor arrecadado!
+    const arrecadado = 1659;
+    const meta = 6000;
+    const percentual = Math.min((arrecadado / meta) * 100, 100).toFixed(1);
+    const barra = document.getElementById("barraProgresso");
+    const textoDentro = document.getElementById("textoBarra");
+    const textoFora = document.getElementById("valorArrecadado");
+    const texto = `R$ ${arrecadado.toLocaleString('pt-BR')} / R$ ${meta.toLocaleString('pt-BR')}`;
 
-  // Edite apenas esse valor:
-  const arrecadado = 1659;
-  const meta = 6000;
-
-  const percentual = Math.min((arrecadado / meta) * 100, 100).toFixed(1);
-  const barra = document.getElementById("barraProgresso");
-  const textoDentro = document.getElementById("textoBarra");
-  const textoFora = document.getElementById("valorArrecadado");
-
-  const texto = `R$ ${arrecadado.toLocaleString('pt-BR')} / R$ ${meta.toLocaleString('pt-BR')}`;
-
-  barra.style.width = percentual + "%";
-
-  if (percentual >= 15) {
-    textoDentro.textContent = texto;
-    textoFora.textContent = `Progresso: ${percentual}% da meta atingida`;
-  } else {
-    textoDentro.textContent = '';
-    textoFora.textContent = `Progresso: ${percentual}% da meta atingida — ${texto}`;
-  }
-</script>
-
-</body>
+    barra.style.width = percentual + "%";
+    if (percentual >= 15) {
+      textoDentro.textContent = texto;
+      textoFora.textContent = `Progresso: ${percentual}% da meta atingida`;
+    } else {
+      textoDentro.textContent = '';
+      textoFora.textContent = `Progresso: ${percentual}% da meta atingida — ${texto}`;
+    }
+  </script></body>
 </html>
