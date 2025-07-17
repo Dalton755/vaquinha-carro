@@ -130,10 +130,16 @@
     Qualquer valor que puder doar será de grande ajuda!</p><p class="pix-key" id="pix">Chave Pix: 11940791693</p>
 <button onclick="copiarPix()">Copiar chave Pix</button>
 
-<div style="background-color: #fff3cd; border: 1px solid #ffeeba; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-  <h2 style="color: #856404;">🚨 Estamos na reta final! Faltam R$1.250 🙏</h2>
-  <p style="font-size: 1.1rem; color: #555;">Com a ajuda de muitas pessoas incríveis, já conseguimos arrecadar <strong>R$5.250</strong> dos <strong>R$6.500</strong> necessários para arrumar o motor do nosso carro — que é essencial para o trabalho e sustento da nossa família.</p>
-  <p style="font-weight: bold; margin: 10px 0;">Agora só faltam <strong>R$1.250</strong> para alcançarmos essa meta. Qualquer valor faz diferença. Se puder ajudar ou compartilhar, já nos ajuda demais!</p>
+<div id="reta-final" style="background-color: #fff3cd; border: 1px solid #ffeeba; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+  <h2 style="color: #856404;">🚨 Estamos na reta final! Faltam <span id="valorFaltante"></span> 🙏</h2>
+  <p style="font-size: 1.1rem; color: #555;">
+    Com a ajuda de muitas pessoas incríveis, já conseguimos arrecadar <strong><span id="valorArrecadadoDestaque"></span></strong>
+    dos <strong><span id="valorMeta"></span></strong> necessários para arrumar o motor do nosso carro — que é essencial para o trabalho e sustento da nossa família.
+  </p>
+  <p style="font-weight: bold; margin: 10px 0;">
+    Agora só faltam <strong><span id="valorFaltante2"></span></strong> para alcançarmos essa meta.
+    Qualquer valor faz diferença. Se puder ajudar ou compartilhar, já nos ajuda demais!
+  </p>
   <a href="#pix" style="background-color: #28a745; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">Contribua agora 💚</a>
 </div>
     
@@ -180,41 +186,51 @@
 
 <p style="margin-top: 20px;">Deus abençoe a todos que puderem contribuir ou compartilhar 🙏</p>
 
-  </div>  <script>
-    function copiarPix() {
-      const chave = document.getElementById("pix").innerText.replace('Chave Pix: ', '');
-      navigator.clipboard.writeText(chave).then(() => {
-        alert("Chave Pix copiada com sucesso!");
-      });
-    }
+  </div>  
+  <script>
+  function copiarPix() {
+    const chave = document.getElementById("pix").innerText.replace('Chave Pix: ', '');
+    navigator.clipboard.writeText(chave).then(() => {
+      alert("Chave Pix copiada com sucesso!");
+    });
+  }
 
-    function compartilhar() {
-      if (navigator.share) {
-        navigator.share({
-          title: 'Ajude a consertar o carro',
-          text: 'Estamos precisando de ajuda para consertar o carro que usamos para trabalhar. Qualquer valor é bem-vindo!',
-          url: window.location.href
-        }).catch((error) => console.log('Erro ao compartilhar:', error));
-      } else {
-        alert("Compartilhamento automático não suportado neste dispositivo.");
-      }
-    }
-
-    const arrecadado = 5359;
-    const meta = 6500;
-    const percentual = Math.min((arrecadado / meta) * 100, 100).toFixed(1);
-    const barra = document.getElementById("barraProgresso");
-    const textoDentro = document.getElementById("textoBarra");
-    const textoFora = document.getElementById("valorArrecadado");
-    const texto = `R$ ${arrecadado.toLocaleString('pt-BR')} / R$ ${meta.toLocaleString('pt-BR')}`;
-
-    barra.style.width = percentual + "%";
-    if (percentual >= 15) {
-      textoDentro.textContent = texto;
-      textoFora.textContent = `Progresso: ${percentual}% da meta atingida`;
+  function compartilhar() {
+    if (navigator.share) {
+      navigator.share({
+        title: 'Ajude a consertar o carro',
+        text: 'Estamos precisando de ajuda para consertar o carro que usamos para trabalhar. Qualquer valor é bem-vindo!',
+        url: window.location.href
+      }).catch((error) => console.log('Erro ao compartilhar:', error));
     } else {
-      textoDentro.textContent = '';
-      textoFora.textContent = `Progresso: ${percentual}% da meta atingida — ${texto}`;
+      alert("Compartilhamento automático não suportado neste dispositivo.");
     }
-  </script></body>
-</html>
+  }
+
+  // Dados
+  const arrecadado = 5250;
+  const meta = 6500;
+  const faltante = Math.max(0, meta - arrecadado);
+
+  // Barra de progresso
+  const percentual = Math.min((arrecadado / meta) * 100, 100).toFixed(1);
+  const barra = document.getElementById("barraProgresso");
+  const textoDentro = document.getElementById("textoBarra");
+  const textoFora = document.getElementById("valorArrecadado");
+  const texto = `R$ ${arrecadado.toLocaleString('pt-BR')} / R$ ${meta.toLocaleString('pt-BR')}`;
+
+  barra.style.width = percentual + "%";
+  if (percentual >= 15) {
+    textoDentro.textContent = texto;
+    textoFora.textContent = `Progresso: ${percentual}% da meta atingida`;
+  } else {
+    textoDentro.textContent = '';
+    textoFora.textContent = `Progresso: ${percentual}% da meta atingida — ${texto}`;
+  }
+
+  // Atualiza valores na seção da reta final
+  document.getElementById("valorArrecadadoDestaque").textContent = `R$ ${arrecadado.toLocaleString('pt-BR')}`;
+  document.getElementById("valorMeta").textContent = `R$ ${meta.toLocaleString('pt-BR')}`;
+  document.getElementById("valorFaltante").textContent = `R$ ${faltante.toLocaleString('pt-BR')}`;
+  document.getElementById("valorFaltante2").textContent = `R$ ${faltante.toLocaleString('pt-BR')}`;
+</script>
